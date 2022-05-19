@@ -47,12 +47,13 @@ void myMouse(int button, int state, int x, int y)
 
 void passiveMotion(int x, int y)
 {
+    // Sets the location of cursor while moving with no buttons pressed
     cursorLocationLive.setxy(x, SCREEN_HEIGHT - y);
 }
 
 void motion(int x, int y)
 {
-    // Set the coordinates of tangent when mouse moves with a button held down
+    // Sets the coordinates of the tangents when mouse moves with a button held down
     Tangent.setxy(x, SCREEN_HEIGHT - y);
     inverseTangent.x = (2 * Points[Points.size() - 1].x) - Tangent.x;
     inverseTangent.y = (2 * Points[Points.size() - 1].y) - Tangent.y;
@@ -69,7 +70,7 @@ void myDisplay()
         drawDot(Points[i]);
     }
 
-    // If there is a starting point draw line to cursor in passive motion
+    // If there is a starting point draw a line to cursor from last drawn point in passive motion
     if (Points.size() > 0)
     {
         glColor3f(0, 0, 0);
@@ -95,18 +96,18 @@ void myDisplay()
         drawLine(Tangents[i], inverseTangents[i]);
     }
 
-    // Draw Bezier Curve Segments
+    // Loop through all points
     for (int i = 0; i < Points.size(); i++)
     {
         // If there are two main points and 2 inverse tangent points draw the first segment
         if (Points.size() == 2)
         {
-            // p1 is the start of the curve
+            // p1 is the start of the curve set at first point
             Point p1;
             p1 = Points[0];
 
             float i;
-            // draw bezier curve
+            // Calculate curve coordinates
             for (float j = 0; j <= 100; j++)
             {
                 i = j / 100;
@@ -137,14 +138,15 @@ void myDisplay()
                 p1 = p2;
             }
         }
+        // Second segment onwards
         else if (Points.size() > 2)
         {
-            // p1 is the start of the curve
+            // p1 is the start of the curve set to second last point
             Point p1;
             p1 = Points[Points.size() - 2];
 
             float i;
-            // draw bezier curve
+            // Calculate curve coordinates
             for (float j = 0; j <= 100; j++)
             {
                 i = j / 100;
@@ -177,7 +179,7 @@ void myDisplay()
         }
     }
 
-    // Draw All Bezier Curvature
+    // Draw all bezier curvature
     for (int i = 1; i < BezierCurve.size(); i++)
     {
         drawLine(BezierCurve[i - 1], BezierCurve[i]);
