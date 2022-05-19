@@ -1,0 +1,6 @@
+﻿  main.cpp
+C:\Users\Arjan Singh\Desktop\BezierCurveTool2.0\BezierCurveTool2.0\main.cpp(61,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Arjan Singh\Desktop\BezierCurveTool2.0\BezierCurveTool2.0\main.cpp(81,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Arjan Singh\Desktop\BezierCurveTool2.0\BezierCurveTool2.0\main.cpp(93,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Arjan Singh\Desktop\BezierCurveTool2.0\BezierCurveTool2.0\main.cpp(139,23): warning C4018: '<': signed/unsigned mismatch
+  BezierCurveTool2.0.vcxproj -> C:\Users\Arjan Singh\Desktop\BezierCurveTool2.0\BezierCurveTool2.0\Debug\BezierCurveTool2.0.exe
