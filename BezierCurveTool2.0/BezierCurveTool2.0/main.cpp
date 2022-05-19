@@ -99,7 +99,7 @@ void myDisplay()
     // Loop through all points
     for (int i = 0; i < Points.size(); i++)
     {
-        // If there are two main points and 2 inverse tangent points draw the first segment
+        // If there are two points draw the first segment
         if (Points.size() == 2)
         {
             // p1 is the start of the curve set at first point
