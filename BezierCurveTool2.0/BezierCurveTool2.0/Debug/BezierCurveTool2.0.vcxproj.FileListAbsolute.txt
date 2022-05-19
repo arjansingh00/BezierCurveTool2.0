@@ -1,2 +1,0 @@
-C:\Users\Arjan Singh\Desktop\BezierCurveTool2.0\BezierCurveTool2.0\Debug\BezierCurveTool2.0.exe
-C:\Users\Arjan Singh\Desktop\BezierCurveTool2.0\BezierCurveTool2.0\Debug\BezierCurveTool2.0.pdb
