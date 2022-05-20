@@ -104,10 +104,9 @@ void myDisplay()
     }
 
 
-    if (PrevMouse == 0 && MouseReleased == 1) 
-    {
+    if (PrevMouse == 0 && MouseReleased == 1) {
         // Loop through all points
-        for (int i = 0; i < Points.size(); i++)
+        for (int i = 0; i < Points.size() - 1; i++)
         {
             // If there are two points draw the first segment
             if (Points.size() == 2)
@@ -116,34 +115,29 @@ void myDisplay()
                 Point p1;
                 p1 = Points[0];
 
-                float i1;
+                float _i;
                 // Calculate curve coordinates
                 for (float j = 0; j <= 100; j++)
                 {
-                    // ignore drawing line of first point
-                    if (i >= 1) {
-                        continue;
-                    }
-
-                    i1 = j / 100;
+                    _i = j / 100;
 
                     // The Green Lines
-                    float xa = interpolate(Points[0].x, inverseTangents[0].x, i1);
-                    float ya = interpolate(Points[0].y, inverseTangents[0].y, i1);
-                    float xb = interpolate(inverseTangents[0].x, inverseTangent.x, i1);
-                    float yb = interpolate(inverseTangents[0].y, inverseTangent.y, i1);
-                    float xc = interpolate(inverseTangent.x, Points[1].x, i1);
-                    float yc = interpolate(inverseTangent.y, Points[1].y, i1);
+                    float xa = interpolate(Points[0].x, inverseTangents[0].x, _i);
+                    float ya = interpolate(Points[0].y, inverseTangents[0].y, _i);
+                    float xb = interpolate(inverseTangents[0].x, inverseTangent.x, _i);
+                    float yb = interpolate(inverseTangents[0].y, inverseTangent.y, _i);
+                    float xc = interpolate(inverseTangent.x, Points[1].x, _i);
+                    float yc = interpolate(inverseTangent.y, Points[1].y, _i);
 
                     // The Blue Line
-                    float xm = interpolate(xa, xb, i1);
-                    float ym = interpolate(ya, yb, i1);
-                    float xn = interpolate(xb, xc, i1);
-                    float yn = interpolate(yb, yc, i1);
+                    float xm = interpolate(xa, xb, _i);
+                    float ym = interpolate(ya, yb, _i);
+                    float xn = interpolate(xb, xc, _i);
+                    float yn = interpolate(yb, yc, _i);
 
                     // The Black Dot
-                    float x2 = interpolate(xm, xn, i1);
-                    float y2 = interpolate(ym, yn, i1);
+                    float x2 = interpolate(xm, xn, _i);
+                    float y2 = interpolate(ym, yn, _i);
 
                     Point p2;
                     p2.setxy(x2, y2);
@@ -167,33 +161,30 @@ void myDisplay()
                 Point p1;
                 p1 = Points[Points.size() - 2];
 
-                float i1;
+                float _i;
+
                 // Calculate curve coordinates
                 for (float j = 0; j <= 100; j++)
                 {
-                    // ignore drawing line of first point
-                    if (i >= 1) {
-                        continue;
-                    }
+                    _i = j / 100;
 
-                    i1 = j / 100;
                     // The Green Lines
-                    float xa = interpolate(Points[Points.size() - 2].x, Tangents[TangentsSize - 2].x, i1);
-                    float ya = interpolate(Points[Points.size() - 2].y, Tangents[TangentsSize - 2].y, i1);
-                    float xb = interpolate(Tangents[TangentsSize - 2].x, inverseTangent.x, i1);
-                    float yb = interpolate(Tangents[TangentsSize - 2].y, inverseTangent.y, i1);
-                    float xc = interpolate(inverseTangent.x, Points[Points.size() - 1].x, i1);
-                    float yc = interpolate(inverseTangent.y, Points[Points.size() - 1].y, i1);
+                    float xa = interpolate(Points[Points.size() - 2].x, Tangents[TangentsSize - 2].x, _i);
+                    float ya = interpolate(Points[Points.size() - 2].y, Tangents[TangentsSize - 2].y, _i);
+                    float xb = interpolate(Tangents[TangentsSize - 2].x, inverseTangent.x, _i);
+                    float yb = interpolate(Tangents[TangentsSize - 2].y, inverseTangent.y, _i);
+                    float xc = interpolate(inverseTangent.x, Points[Points.size() - 1].x, _i);
+                    float yc = interpolate(inverseTangent.y, Points[Points.size() - 1].y, _i);
 
                     // The Blue Line
-                    float xm = interpolate(xa, xb, i1);
-                    float ym = interpolate(ya, yb, i1);
-                    float xn = interpolate(xb, xc, i1);
-                    float yn = interpolate(yb, yc, i1);
+                    float xm = interpolate(xa, xb, _i);
+                    float ym = interpolate(ya, yb, _i);
+                    float xn = interpolate(xb, xc, _i);
+                    float yn = interpolate(yb, yc, _i);
 
                     // The Black Dot
-                    float x2 = interpolate(xm, xn, i1);
-                    float y2 = interpolate(ym, yn, i1);
+                    float x2 = interpolate(xm, xn, _i);
+                    float y2 = interpolate(ym, yn, _i);
 
                     Point p2;
                     p2.setxy(x2, y2);
@@ -207,11 +198,11 @@ void myDisplay()
                         BezierCurve.push_back(p2);
                     }
                 }
+                break;
             }
         }
     }
-    else if (MouseReleased == 0) 
-    {
+    else if (MouseReleased == 0) {
 
         LiveBezierCurve = {};
         // Loop through all points
@@ -258,7 +249,7 @@ void myDisplay()
                     if (MouseReleased)
                     {
                         // Store curvature into Bezier Points
-                        LiveBezierCurve.push_back(p2);
+                        BezierCurve.push_back(p2);
                     }
                 }
             }
