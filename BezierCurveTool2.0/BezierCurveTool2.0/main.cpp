@@ -1,9 +1,9 @@
 #include <iostream>
 #include <stdlib.h>
 #include <GL/glut.h>
-#include "header.h"
 #include <vector>
 #include <math.h>
+#include "header.h"
 
 using namespace std;
 
@@ -15,6 +15,7 @@ int TangentsSize = 0;
 vector<Point> Tangents(TangentsSize);
 vector<Point> inverseTangents(TangentsSize);
 vector<Point> BezierCurve;
+bool MouseReleased = false;
 
 void myMouse(int button, int state, int x, int y)
 {
@@ -22,6 +23,7 @@ void myMouse(int button, int state, int x, int y)
     {
         if (state == GLUT_DOWN)
         {
+            MouseReleased = false;
             // Store points into Points vector on click
             Point point;
             point.setxy(x, SCREEN_HEIGHT - y);
@@ -38,6 +40,7 @@ void myMouse(int button, int state, int x, int y)
         }
         else if (state == GLUT_UP)
         {
+            MouseReleased = true;
             // Upon mouse release store tangent and inverse tangent into separate vectors
             Tangents.push_back(Tangent);
             inverseTangents.push_back(inverseTangent);
@@ -132,10 +135,16 @@ void myDisplay()
                 Point p2;
                 p2.setxy(x2, y2);
 
-                // Store curvature into Bezier Points
-                BezierCurve.push_back(p2);
+                drawLine(p1, p2);
 
                 p1 = p2;
+
+                // Prevents curves generated during mouse motion from being stored
+                if (MouseReleased)
+                {
+                    // Store curvature into Bezier Points
+                    BezierCurve.push_back(p2);
+                }
             }
         }
         // Second segment onwards
@@ -171,10 +180,16 @@ void myDisplay()
                 Point p2;
                 p2.setxy(x2, y2);
 
-                // Store curvature into Bezier Points
-                BezierCurve.push_back(p2);
+                drawLine(p1, p2);
 
                 p1 = p2;
+
+                // Prevents curves generated during mouse motion from being stored
+                if (MouseReleased)
+                {
+                    // Store curvature into Bezier Points
+                    BezierCurve.push_back(p2);
+                }
             }
         }
     }
