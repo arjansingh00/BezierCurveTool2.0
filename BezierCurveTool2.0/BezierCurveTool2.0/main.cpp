@@ -104,7 +104,8 @@ void myDisplay()
     }
 
 
-    if (PrevMouse == 0 && MouseReleased == 1) {
+    if (PrevMouse == 0 && MouseReleased == 1) 
+    {
         // Loop through all points
         for (int i = 0; i < Points.size(); i++)
         {
@@ -209,7 +210,8 @@ void myDisplay()
             }
         }
     }
-    else if (MouseReleased == 0) {
+    else if (MouseReleased == 0) 
+    {
 
         LiveBezierCurve = {};
         // Loop through all points
@@ -256,7 +258,7 @@ void myDisplay()
                     if (MouseReleased)
                     {
                         // Store curvature into Bezier Points
-                        BezierCurve.push_back(p2);
+                        LiveBezierCurve.push_back(p2);
                     }
                 }
             }
