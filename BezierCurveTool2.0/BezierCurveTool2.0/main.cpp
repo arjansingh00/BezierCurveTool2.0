@@ -18,7 +18,7 @@ vector<Point> BezierCurve;
 vector<Point> LiveBezierCurve;
 
 bool MouseReleased = false;
-bool PrevMouse = false;
+bool MouseDown = false;
 
 void myMouse(int button, int state, int x, int y)
 {
@@ -104,7 +104,7 @@ void myDisplay()
     }
 
 
-    if (PrevMouse == 0 && MouseReleased == 1) 
+    if (MouseDown == false && MouseReleased == true)
     {
         // Loop through all points
         for (int i = 0; i < Points.size() - 1; i++)
@@ -203,7 +203,7 @@ void myDisplay()
             }
         }
     }
-    else if (MouseReleased == 0) 
+    else if (MouseReleased == false)
     {
 
         LiveBezierCurve = {};
@@ -304,7 +304,7 @@ void myDisplay()
 
     }
 
-    PrevMouse = MouseReleased;
+    MouseDown = MouseReleased;
 
 
     // Draw all bezier curvature
