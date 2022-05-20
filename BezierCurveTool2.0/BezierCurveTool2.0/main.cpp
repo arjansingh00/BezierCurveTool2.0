@@ -15,13 +15,11 @@ int TangentsSize = 0;
 vector<Point> Tangents(TangentsSize);
 vector<Point> inverseTangents(TangentsSize);
 vector<Point> BezierCurve;
-
 bool MouseReleased = false;
 bool MouseDown = false;
 
 void myMouse(int button, int state, int x, int y)
 {
-
     if (button == GLUT_LEFT_BUTTON)
     {
         if (state == GLUT_DOWN)
@@ -65,100 +63,6 @@ void motion(int x, int y)
     inverseTangent.y = (2 * Points[Points.size() - 1].y) - Tangent.y;
 }
 
-vector<Point> drawCurve(int pointIndex) 
-{
-    vector<Point> BezierCurve = {};
-
-    // Loop through all points
-    for (int i = 0; i < pointIndex; i++)
-    {
-        // If there are two points draw the first segment
-        if (Points.size() == 2)
-        {
-            // p1 is the start of the curve set at first point
-            Point p1;
-            p1 = Points[0];
-
-            float interpolationFactor;
-            // Calculate curve coordinates
-            for (float j = 0; j <= 100; j++)
-            {
-                interpolationFactor = j / 100;
-                // The Green Lines
-                float xa = interpolate(Points[0].x, inverseTangents[0].x, interpolationFactor);
-                float ya = interpolate(Points[0].y, inverseTangents[0].y, interpolationFactor);
-                float xb = interpolate(inverseTangents[0].x, inverseTangent.x, interpolationFactor);
-                float yb = interpolate(inverseTangents[0].y, inverseTangent.y, interpolationFactor);
-                float xc = interpolate(inverseTangent.x, Points[1].x, interpolationFactor);
-                float yc = interpolate(inverseTangent.y, Points[1].y, interpolationFactor);
-
-                // The Blue Line
-                float xm = interpolate(xa, xb, interpolationFactor);
-                float ym = interpolate(ya, yb, interpolationFactor);
-                float xn = interpolate(xb, xc, interpolationFactor);
-                float yn = interpolate(yb, yc, interpolationFactor);
-
-                // The Black Dot
-                float x2 = interpolate(xm, xn, interpolationFactor);
-                float y2 = interpolate(ym, yn, interpolationFactor);
-
-                Point p2;
-                p2.setxy(x2, y2);
-
-                drawLine(p1, p2);
-
-                p1 = p2;
-
-                BezierCurve.push_back(p2);
-            }
-        }
-        // Second segment onwards
-        else if (Points.size() > 2)
-        {
-            // p1 is the start of the curve set to second last point
-            Point p1;
-            p1 = Points[Points.size() - 2];
-
-            float interpolationFactor;
-            // Calculate curve coordinates
-            for (float j = 0; j <= 100; j++)
-            {
-                interpolationFactor = j / 100;
-                // The Green Lines
-                float xa = interpolate(Points[Points.size() - 2].x, Tangents[TangentsSize - 2].x, interpolationFactor);
-                float ya = interpolate(Points[Points.size() - 2].y, Tangents[TangentsSize - 2].y, interpolationFactor);
-                float xb = interpolate(Tangents[TangentsSize - 2].x, inverseTangent.x, interpolationFactor);
-                float yb = interpolate(Tangents[TangentsSize - 2].y, inverseTangent.y, interpolationFactor);
-                float xc = interpolate(inverseTangent.x, Points[Points.size() - 1].x, interpolationFactor);
-                float yc = interpolate(inverseTangent.y, Points[Points.size() - 1].y, interpolationFactor);
-
-                // The Blue Line
-                float xm = interpolate(xa, xb, interpolationFactor);
-                float ym = interpolate(ya, yb, interpolationFactor);
-                float xn = interpolate(xb, xc, interpolationFactor);
-                float yn = interpolate(yb, yc, interpolationFactor);
-
-                // The Black Dot
-                float x2 = interpolate(xm, xn, interpolationFactor);
-                float y2 = interpolate(ym, yn, interpolationFactor);
-
-                Point p2;
-                p2.setxy(x2, y2);
-
-                drawLine(p1, p2);
-
-                p1 = p2;
-
-                BezierCurve.push_back(p2);
-
-            }
-            break;
-        }
-    }
-
-    return BezierCurve;
-}
-
 void myDisplay()
 {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -196,33 +100,60 @@ void myDisplay()
         drawLine(Tangents[i], inverseTangents[i]);
     }
 
-    // If mouse is released add the new segment to existing curvature
-    if (MouseDown == false && MouseReleased == true) 
+    // Loop through all points
+    if (Points.size() >= 2)
     {
-        // add new curve to end of bezier curve
-        // Points.size() - 1 gives us the correct number of points to loop over
-        vector<Point> newCurve = drawCurve(Points.size() - 1);
-        BezierCurve.insert(BezierCurve.end(), newCurve.begin(), newCurve.end());
+        // p1 is the start of the curve set to second last point
+        Point p1;
+        p1 = Points[Points.size() - 2];
 
-    }
-    // Mouse is still down so draw what is live and in motion
-    else if (MouseReleased == false) 
-    {
-        // dont add new curve to end of bezier curve
-        vector<Point> newCurve = drawCurve(Points.size() - 1);
+        float i;
+        // Calculate curve coordinates
+        for (float j = 0; j <= 100; j++)
+        {
+            i = j / 100;
+            // The Green Lines
+            float xa = interpolate(Points[Points.size() - 2].x, Tangents[TangentsSize - 2].x, i);
+            float ya = interpolate(Points[Points.size() - 2].y, Tangents[TangentsSize - 2].y, i);
+            float xb = interpolate(Tangents[TangentsSize - 2].x, inverseTangent.x, i);
+            float yb = interpolate(Tangents[TangentsSize - 2].y, inverseTangent.y, i);
+            float xc = interpolate(inverseTangent.x, Points[Points.size() - 1].x, i);
+            float yc = interpolate(inverseTangent.y, Points[Points.size() - 1].y, i);
+
+            // The Blue Line
+            float xm = interpolate(xa, xb, i);
+            float ym = interpolate(ya, yb, i);
+            float xn = interpolate(xb, xc, i);
+            float yn = interpolate(yb, yc, i);
+
+            // The Black Dot
+            float x2 = interpolate(xm, xn, i);
+            float y2 = interpolate(ym, yn, i);
+
+            Point p2;
+            p2.setxy(x2, y2);
+
+            glColor3f(0, 0, 0);
+            drawLine(p1, p2);
+
+            p1 = p2;
+
+            // Prevents curves generated during mouse motion from being stored
+            if (MouseDown == false && MouseReleased == true)
+            {
+                // Store curvature into Bezier Points
+                BezierCurve.push_back(p2);
+            }
+        }
     }
 
     MouseDown = MouseReleased;
-
 
     // Draw all bezier curvature
     for (int i = 1; i < BezierCurve.size(); i++)
     {
         drawLine(BezierCurve[i - 1], BezierCurve[i]);
     }
-
-    //std::cout << BezierCurve.size() << std::endl;
-
 
     glutSwapBuffers();
 }
@@ -251,7 +182,6 @@ int main(int argc, char* argv[]) {
     glLoadIdentity();
     gluOrtho2D(0.0, 640.0, 0.0, 500.0);
     glutMainLoop();
-
 
     return 0;
 }
