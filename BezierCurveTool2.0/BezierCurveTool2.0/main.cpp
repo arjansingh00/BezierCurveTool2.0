@@ -16,7 +16,7 @@ vector<Point> Tangents(TangentsSize);
 vector<Point> inverseTangents(TangentsSize);
 vector<Point> BezierCurve;
 bool MouseReleased = false;
-bool MouseDown = false;
+bool PrevMouse = false;
 
 void myMouse(int button, int state, int x, int y)
 {
@@ -139,7 +139,7 @@ void myDisplay()
             p1 = p2;
 
             // Prevents curves generated during mouse motion from being stored
-            if (MouseDown == false && MouseReleased == true)
+            if (PrevMouse == false && MouseReleased == true)
             {
                 // Store curvature into Bezier Points
                 BezierCurve.push_back(p2);
@@ -147,7 +147,10 @@ void myDisplay()
         }
     }
 
-    MouseDown = MouseReleased;
+    // When the mouse is down PrevMouse = false so when the mouse is released
+    // the if statement evaluates to true and stores the new curvature once
+    // and then sets PrevMouse to true to prevent writing on top of the vector
+    PrevMouse = MouseReleased;
 
     // Draw all bezier curvature
     for (int i = 1; i < BezierCurve.size(); i++)
