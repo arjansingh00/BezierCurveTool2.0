@@ -67,6 +67,14 @@ void myDisplay()
 {
     glClear(GL_COLOR_BUFFER_BIT);
 
+    // Draw live tangent dots in green
+    glColor3f(0, 255, 0);
+    drawDot(Tangent);
+    drawDot(inverseTangent);
+    // Draw live tangent lines in blue
+    glColor3f(0, 0, 255);
+    drawLine(Tangent, inverseTangent);
+
     // Draw main points in red
     glColor3f(255, 0, 0);
     for (int i = 0; i < Points.size(); i++)
@@ -81,14 +89,6 @@ void myDisplay()
         drawLine(Points[Points.size() - 1], cursorLocationLive);
     }
 
-    // Draw live tangent dots in green
-    glColor3f(0, 255, 0);
-    drawDot(Tangent);
-    drawDot(inverseTangent);
-    // Draw live tangent lines in blue
-    glColor3f(0, 0, 255);
-    drawLine(Tangent, inverseTangent);
-
     for (int i = 0; i < Tangents.size(); i++)
     {
         // Draw stored tangent dots in green
@@ -100,7 +100,7 @@ void myDisplay()
         drawLine(Tangents[i], inverseTangents[i]);
     }
 
-    // Loop through all points
+    // Curve Generator
     if (Points.size() >= 2)
     {
         // p1 is the start of the curve set to second last point
@@ -138,18 +138,15 @@ void myDisplay()
 
             p1 = p2;
 
-            // Prevents curves generated during mouse motion from being stored
-            if (PrevMouse == false && MouseReleased == true)
+            // Has the mouse been released?
+            if (MouseReleased == true && PrevMouse == false)
             {
-                // Store curvature into Bezier Points
                 BezierCurve.push_back(p2);
             }
         }
     }
 
-    // When the mouse is down PrevMouse = false so when the mouse is released
-    // the if statement evaluates to true and stores the new curvature once
-    // and then sets PrevMouse to true to prevent writing on top of the vector
+    // Mouse state
     PrevMouse = MouseReleased;
 
     // Draw all bezier curvature
