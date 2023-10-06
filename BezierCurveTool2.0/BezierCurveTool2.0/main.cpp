@@ -146,7 +146,7 @@ void myDisplay()
         }
     }
 
-    // Mouse state
+    // Current mouse state
     PrevMouse = MouseReleased;
 
     // Draw all bezier curvature
