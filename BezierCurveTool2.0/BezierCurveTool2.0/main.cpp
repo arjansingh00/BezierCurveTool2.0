@@ -11,6 +11,7 @@ vector<Point> Points;
 Point Tangent;
 Point inverseTangent;
 Point cursorLocationLive;
+Point p2;
 int TangentsSize = 0;
 vector<Point> Tangents(TangentsSize);
 vector<Point> inverseTangents(TangentsSize);
@@ -100,7 +101,7 @@ void myDisplay()
         drawLine(Tangents[i], inverseTangents[i]);
     }
 
-    // Curve Generator
+    // Curve Generator (The most recent curve segment is drawn even if stored)
     if (Points.size() >= 2)
     {
         // p1 is the start of the curve set to second last point
@@ -130,7 +131,6 @@ void myDisplay()
             float x2 = interpolate(xm, xn, i);
             float y2 = interpolate(ym, yn, i);
 
-            Point p2;
             p2.setxy(x2, y2);
 
             glColor3f(0, 0, 0);
@@ -138,7 +138,7 @@ void myDisplay()
 
             p1 = p2;
 
-            // Has the mouse been released?
+            // If the mouse is released after an edit, save points.
             if (MouseReleased == true && PrevMouse == false)
             {
                 BezierCurve.push_back(p2);
@@ -146,14 +146,14 @@ void myDisplay()
         }
     }
 
-    // Current mouse state
-    PrevMouse = MouseReleased;
-
     // Draw all bezier curvature
     for (int i = 1; i < BezierCurve.size(); i++)
     {
         drawLine(BezierCurve[i - 1], BezierCurve[i]);
     }
+
+    // Save the mouse state for the next frame
+    PrevMouse = MouseReleased;
 
     glutSwapBuffers();
 }
