@@ -8,11 +8,9 @@
 
 #### 3) Copy Files to the Appropriate Locations:
 
-Copy glut.h to your Visual Studio include directory:
+Copy glut.h to your Microsoft Visual Studio include directory and create the GL folder if it doesn't exist:
 
 > *C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\include\GL*
-
-Create the GL folder inside the include directory if it doesn’t exist.
 
 Copy glut32.lib to the library directory:
 
