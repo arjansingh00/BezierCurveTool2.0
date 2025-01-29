@@ -9,21 +9,21 @@
 
 #### 3) Copy Files to the Appropriate Locations:
 
-*Copy glut.h to your Visual Studio include directory:*
+Copy glut.h to your Visual Studio include directory:
 
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\include\GL
+*C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\include\GL*
 
 Create the GL folder inside the include directory if it doesn’t exist.
 
-*Copy glut32.lib to the library directory:*
+Copy glut32.lib to the library directory:
 
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\lib\x86
+*C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\lib\x86*
 
-*Copy glut32.dll to the correct system-wide directory:*
+Copy glut32.dll to the correct system-wide directory:
 
-C:\Windows\System32 (for 64-bit systems)
+*C:\Windows\System32 (for 64-bit systems)*
 
-C:\Windows\SysWOW64 (for 32-bit systems, if applicable)
+*C:\Windows\SysWOW64 (for 32-bit systems, if applicable)*
 
 #### 4. Visual Studio project configuration:
 
