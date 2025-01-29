@@ -25,7 +25,7 @@ C:\Windows\System32 (for 64-bit systems)
 
 C:\Windows\SysWOW64 (for 32-bit systems, if applicable)
 
-4. Visual Studio project configuration:
+#### 4. Visual Studio project configuration:
 
 Open Project Properties by right-clicking on your project in the Solution Explorer and selecting Properties. 
 
