@@ -1,5 +1,4 @@
-
-# Quickstart guide
+## Quickstart guide
 
 ### Instructions to run this application on Windows and to be able to compile with Microsoft Visual Studio 2022:
 
