@@ -4,7 +4,7 @@
 
 #### 1) Download GLUT (glut.h, glut32.lib, and glut32.dll) from (https://www.opengl.org/resources/libraries/glut/glut_downloads.php#windows).
 
-#### 2) Extract the downloaded GLUT zip file to a folder on your computer.
+#### 2) Extract the downloaded GLUT .zip file to a folder on your computer.
 
 #### 3) Copy Files to the Appropriate Locations:
 
