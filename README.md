@@ -28,7 +28,9 @@ Open Project Properties by right-clicking on your project in the Solution Explor
 
 Under Configuration Properties > VC++ Directories : Add the path to your GLUT include directory in Include Directories.
 
-Add the path to your GLUT lib directory in Library Directories. Under Configuration     Properties > Linker > Input: Add glut32.lib to the Additional Dependencies field.
+Add the path to your GLUT lib directory in Library Directories.
+
+Under Configuration Properties > Linker > Input: Add glut32.lib to the Additional Dependencies field.
 
 Copy glut32.dll to the output directory Make sure glut32.dll is either in the same folder as your .exe.
 
