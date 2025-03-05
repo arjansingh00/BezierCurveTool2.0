@@ -34,3 +34,4 @@ Open Project Properties by right-clicking on your project in the Solution Explor
 
    4. Copy glut32.dll to the output directory Make sure glut32.dll is either in the same folder as your .exe.
 
+#### 5) Debug with the platform set as x86.
