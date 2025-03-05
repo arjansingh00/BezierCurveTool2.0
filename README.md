@@ -22,13 +22,15 @@ Copy glut32.dll to the correct system-wide directory:
 
 > *C:\Windows\SysWOW64 (for 32-bit systems, if applicable)*
 
-#### 4. Visual Studio project configuration:
+#### 4) Visual Studio project configuration:
 
 Open Project Properties by right-clicking on your project in the Solution Explorer and selecting Properties. 
 
-Under Configuration Properties > VC++ Directories : Add the path to your GLUT include directory in Include Directories.
+   1. Under Configuration Properties > VC++ Directories : Add the path to your GLUT include directory in Include Directories.
 
-Under Configuration Properties > Linker > Input: Add glut32.lib to the Additional Dependencies field.
+   2. Under Configuration Properties > VC++ Directories : Add the path to your GLUT lib directory in Library Directories.
 
-Copy glut32.dll to the output directory Make sure glut32.dll is either in the same folder as your .exe.
+   3. Under Configuration Properties > Linker > Input: Add glut32.lib to the Additional Dependencies field.
+
+   4. Copy glut32.dll to the output directory Make sure glut32.dll is either in the same folder as your .exe.
 
