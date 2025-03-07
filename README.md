@@ -32,6 +32,6 @@ Open Project Properties by right-clicking on your project in the Solution Explor
 
    3. Under Configuration Properties > Linker > Input: Add glut32.lib to the Additional Dependencies field.
 
-   4. Copy glut32.dll to the output directory Make sure glut32.dll is either in the same folder as your .exe.
+   4. Copy glut32.dll to the output directory and make sure glut32.dll is in the same folder as your .exe file.
 
 #### 5) Debug with the platform set as x86.
